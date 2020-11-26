@@ -1,17 +1,7 @@
-struct Vertex
-    id::Integer
-end
+# Pkg.add("ZipFile")
+# Pkg.add("JSON")
 
-struct Edge
-    id::Integer
-    node_a::Integer
-    node_b::Integer
-end
-
-struct MultiGraph
-    vertices::Array{Vertex}
-    edges::Array{Edge}
-end
+include("domain.jl")
 
 function randVertex()::Integer
     return rand(1)[1]*10|>round|>Integer
