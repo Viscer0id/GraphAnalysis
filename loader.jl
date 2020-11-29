@@ -15,19 +15,23 @@ function load_data(filename::String)::Dict
     return JSON.parse(contents)
 end
 
-function to_graph(inputDict::Dict)::Any
+function load_graph(inputDict::Dict)::MultiGraph
     graph_d = get(inputDict, "graph", nothing)
     vertices_d = get(graph_d, "vertices", nothing)
     edges_d = get(graph_d, "edges", nothing)
 
     vertices = map(dict->Vertex(get(dict,"id",nothing)),vertices_d)
     edges = map(dict->Edge(get(dict,"id",nothing), get(dict,"node_a", nothing), get(dict, "node_b", nothing)), edges_d)
-    print(vertices)
-    print(edges)
+
+    return MultiGraph(vertices, edges)
 end
 
-g = load_data("/home/jeremy/Codes/GraphAnalysis/sampleGraph.json")
-to_graph(g)
+function load_graph(filename::String)::MultiGraph
+    return load_data(filename)|>load_graph
+end
+
+# g = load_data("/home/jeremy/Codes/GraphAnalysis/sampleGraph.json")
+# to_graph(g)
 # print(g)
 # JSON.print(stdout, g, 4)
 

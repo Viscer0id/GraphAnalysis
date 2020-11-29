@@ -2,11 +2,6 @@
 # Pkg.add("JSON")
 
 include("domain.jl")
+include("loader.jl")
 
-function randVertex()::Integer
-    return rand(1)[1]*10|>round|>Integer
-end
-
-vertices = map(x -> Vertex(x), [1:30;])
-edges = map(x -> Edge(x, randVertex(), randVertex()), [1:10;])
-graph = MultiGraph(vertices, edges)
+graph = load_graph("/home/jeremy/Codes/GraphAnalysis/sampleGraph.json")
